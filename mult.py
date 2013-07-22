@@ -5,8 +5,7 @@ from shutil import rmtree
 from subprocess import call
 import sys
 import zipfile
-from read_roi import read_roi
-from PIL import Image, ImageDraw
+from read_roi import salva_img_crop_rois
 
 curdir = getcwd()
 imagejdir = 'your_ImageJ_dir'
@@ -59,21 +58,6 @@ def natsorted(seq, cmp=natcmp):
     temp = copy.copy(seq)
     natsort(temp, cmp)
     return temp
-
-def salva_img_crop_rois(image):
-
-    arqs = glob('rois/'+image+'-*.roi')
-    
-    im = Image.open(image)
-    draw = ImageDraw.Draw(im)
-    for arq in arqs:
-        f = open(arq, 'r')
-        pontos = read_roi(f)
-        xs = [x for (x,y) in pontos]
-        ys = [y for (x,y) in pontos]
-        imroi = im.crop((min(ys), min(xs),max(ys),max(xs)))
-        arqname = 'roiimgs/'+ '/'.join(arq .split('/')[1:]) +'.jpg'
-        imroi.save(arqname)
 
 def executaImageJ(chunk):
     
