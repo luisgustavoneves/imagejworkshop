@@ -5,7 +5,7 @@ from shutil import rmtree
 from subprocess import call
 import sys
 import zipfile
-from read_roi import salva_img_crop_rois
+from readroi import salva_img_crop_rois
 
 curdir = getcwd()
 imagejdir = 'your_ImageJ_dir'
